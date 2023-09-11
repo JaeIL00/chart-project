@@ -1,14 +1,14 @@
 import { ChartDataset } from "chart.js";
 import { DistrictSeoulData } from "../types";
-import { CHART_COLOR } from "../constants";
+import { CHART_COLOR, CHART_LABElS, CHART_ORDER } from "../constants";
 
 const getBarDataset = (data: DistrictSeoulData[]): ChartDataset<"bar"> => {
     return {
         type: "bar",
-        label: "bar",
-        yAxisID: "bar",
+        label: CHART_LABElS.BAR,
+        yAxisID: CHART_LABElS.BAR,
         data: data.map((item) => item.value_bar),
-        order: 2,
+        order: CHART_ORDER.BAR,
         backgroundColor: CHART_COLOR.BAR,
     };
 };
@@ -16,10 +16,10 @@ const getBarDataset = (data: DistrictSeoulData[]): ChartDataset<"bar"> => {
 const getLineDataset = (data: DistrictSeoulData[]): ChartDataset<"line"> => {
     return {
         type: "line",
-        label: "area",
-        yAxisID: "area",
+        label: CHART_LABElS.AREA,
+        yAxisID: CHART_LABElS.AREA,
         data: data.map((item) => item.value_area),
-        order: 1,
+        order: CHART_ORDER.AREA,
         backgroundColor: CHART_COLOR.AREA,
         borderColor: CHART_COLOR.AREA,
         borderWidth: 2,

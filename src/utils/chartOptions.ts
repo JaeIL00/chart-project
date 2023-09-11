@@ -26,7 +26,6 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
                     size: 14,
                 },
             },
-            max: 200,
             beginAtZero: true,
         },
         y: {

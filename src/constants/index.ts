@@ -5,3 +5,11 @@ export const CHART_COLOR = {
     BAR: "rgb(39, 158, 255, 0.4)",
     AREA: "rgb(213, 255, 208, 0.6)",
 };
+export const CHART_LABElS = {
+    BAR: "bar",
+    AREA: "area",
+};
+export const CHART_ORDER = {
+    BAR: 2,
+    AREA: 1,
+};
