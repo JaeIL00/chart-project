@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getDistrictSeoulApi } from "../apis/districtSeoul";
-import { DistrictSeoulResponse } from "../types";
-import getSeperateResponse from "../utils/getSeperateResponse";
-import getChartDataset from "../utils/getChartDataset";
 import { ChartData } from "chart.js";
+
+import { DistrictSeoulResponse } from "../types";
+import { getDistrictSeoulApi } from "../apis/districtSeoul";
+import { getSeperateResponse, getChartDataset } from "../utils";
 
 const useChartData = () => {
     const [chartData, setChartData] = useState<ChartData<"bar">>();

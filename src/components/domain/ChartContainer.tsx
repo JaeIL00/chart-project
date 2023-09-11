@@ -1,13 +1,15 @@
 import { Chart } from "react-chartjs-2";
-import "../../styles/chartContainerStyle.scss";
 import {
     Chart as ChartJS,
     LinearScale,
     CategoryScale,
     BarElement,
 } from "chart.js";
+
 import useChartData from "../../hooks/useChartData";
-import chartOptions from "../../utils/chartOptions";
+import { chartOptions } from "../../utils";
+
+import "../../styles/chartContainerStyle.scss";
 
 ChartJS.register(LinearScale, CategoryScale, BarElement);
 
