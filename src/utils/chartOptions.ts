@@ -1,5 +1,5 @@
 import { ChartOptions, CoreScaleOptions, Scale } from "chart.js";
-import { CHART_LIMIT } from "../constants";
+import { CHART_COLOR, CHART_LIMIT } from "../constants";
 
 const chartOptions: ChartOptions<"bar" | "line"> = {
     responsive: true,
@@ -13,6 +13,9 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
                 font: {
                     size: 14,
                 },
+            },
+            grid: {
+                color: CHART_COLOR.GRID,
             },
             afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
                 (scale.max = scale.max * CHART_LIMIT.BAR),
@@ -34,11 +37,15 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
         y: {
             display: false,
         },
+        x: {
+            grid: {
+                color: CHART_COLOR.GRID,
+            },
+        },
     },
     plugins: {
         filler: {
             propagate: true,
-            drawTime: "beforeDatasetsDraw",
         },
     },
 };
