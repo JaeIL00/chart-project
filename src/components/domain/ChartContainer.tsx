@@ -1,6 +1,5 @@
 import { Chart } from "react-chartjs-2";
 import "../../styles/chartContainerStyle.scss";
-import mockData from "../../mock/data.json";
 import { useEffect, useState } from "react";
 import {
     Chart as ChartJS,
@@ -9,14 +8,14 @@ import {
     BarElement,
 } from "chart.js";
 import getFormatDateString from "../../utils/getFormatDateString";
+import { getDistrictSeoulApi } from "../../apis/districtSeoul";
+import { DistrictSeoulData, DistrictSeoulResponse } from "../../types";
 
 ChartJS.register(LinearScale, CategoryScale, BarElement);
 
 const ChartContainer = () => {
     const [labels, setLabels] = useState<string[]>([]);
-    const [data, setData] = useState<
-        { id: string; value_area: number; value_bar: number }[]
-    >([]);
+    const [data, setData] = useState<DistrictSeoulData[]>([]);
 
     const [chartData, setChartData] = useState<any>();
 
@@ -36,16 +35,29 @@ const ChartContainer = () => {
         }
     }, [data]);
 
-    useEffect(() => {
-        const dateArr = Object.keys(mockData.response);
+    const formatFetchResponse = (data: DistrictSeoulResponse) => {
+        const dateArr = Object.keys(data.response);
+        const dataArr = Object.values(data.response);
+
         const formatDateArr = dateArr.map((item) => {
             const date = new Date(item);
             return getFormatDateString(date);
         });
-        const dataArr = Object.values(mockData.response);
+
         setLabels(formatDateArr);
         setData(dataArr);
+    };
+
+    const fetch = async () => {
+        await getDistrictSeoulApi().then(({ data }) =>
+            formatFetchResponse(data)
+        );
+    };
+
+    useEffect(() => {
+        fetch();
     }, []);
+
     return (
         <main>
             {chartData && (
