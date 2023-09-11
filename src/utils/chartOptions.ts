@@ -1,4 +1,5 @@
 import { ChartOptions, CoreScaleOptions, Scale } from "chart.js";
+import { CHART_LIMIT } from "../constants";
 
 const chartOptions: ChartOptions<"bar" | "line"> = {
     responsive: true,
@@ -14,7 +15,7 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
                 },
             },
             afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
-                (scale.max = scale.max * 1.2),
+                (scale.max = scale.max * CHART_LIMIT.BAR),
         },
         area: {
             display: true,
@@ -26,6 +27,8 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
                     size: 14,
                 },
             },
+            afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
+                (scale.max = scale.max * CHART_LIMIT.AREA),
             beginAtZero: true,
         },
         y: {
@@ -35,6 +38,7 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
     plugins: {
         filler: {
             propagate: true,
+            drawTime: "beforeDatasetsDraw",
         },
     },
 };

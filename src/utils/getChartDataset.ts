@@ -22,6 +22,7 @@ const getLineDataset = (data: DistrictSeoulData[]): ChartDataset<"line"> => {
         order: CHART_ORDER.AREA,
         backgroundColor: CHART_COLOR.AREA,
         borderColor: CHART_COLOR.AREA,
+        borderJoinStyle: "round",
         borderWidth: 2,
         pointStyle: false,
         fill: true,
