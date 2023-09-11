@@ -1,8 +1,15 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import { RootLayout } from "./components";
 
 function App() {
-    return <RootLayout />;
+    return (
+        <>
+            <header>
+                <h1>시계열 차트</h1>
+            </header>
+            <Outlet />
+        </>
+    );
 }
 
 export default App;
