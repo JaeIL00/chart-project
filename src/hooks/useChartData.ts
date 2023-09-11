@@ -6,7 +6,7 @@ import { getDistrictSeoulApi } from "../apis/districtSeoul";
 import { getSeperateResponse, getChartDataset } from "../utils";
 
 const useChartData = () => {
-    const [chartData, setChartData] = useState<ChartData<"bar">>();
+    const [chartData, setChartData] = useState<ChartData<"bar" | "line">>();
 
     const formatFetchResponse = (data: DistrictSeoulResponse) => {
         const { dataValue, axisXLabels } = getSeperateResponse(data);

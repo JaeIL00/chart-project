@@ -4,6 +4,9 @@ import {
     LinearScale,
     CategoryScale,
     BarElement,
+    PointElement,
+    LineElement,
+    Filler,
 } from "chart.js";
 
 import useChartData from "../../hooks/useChartData";
@@ -11,7 +14,14 @@ import { chartOptions } from "../../utils";
 
 import "../../styles/chartContainerStyle.scss";
 
-ChartJS.register(LinearScale, CategoryScale, BarElement);
+ChartJS.register(
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    PointElement,
+    LineElement,
+    Filler
+);
 
 const ChartContainer = () => {
     const { chartData } = useChartData();
