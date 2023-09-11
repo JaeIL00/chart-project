@@ -7,6 +7,10 @@ export const CHART_COLOR = {
     GRID: " rgb(255, 255, 255, 0.1)",
 };
 export const CHART_LABElS = {
+    BAR: "Bar",
+    AREA: "Area",
+};
+export const CHART_ID = {
     BAR: "bar",
     AREA: "area",
 };
