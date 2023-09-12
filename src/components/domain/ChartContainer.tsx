@@ -16,6 +16,7 @@ import { chartOptions } from "../../utils";
 
 import "../../styles/chartContainerStyle.scss";
 import { MouseEvent, useState } from "react";
+import ChartFilter from "./ChartFilter";
 
 ChartJS.register(
     LinearScale,
@@ -54,30 +55,11 @@ const ChartContainer = () => {
                 <Chart type="bar" data={chartData} options={chartOptions} />
             )}
 
-            <section className="filter-container">
-                <div className="title-box">
-                    <h5 className="filter-title">차트 필터</h5>
-                    <span className="sub-describe">중복 선택</span>
-                </div>
-                <ul className="filter-btn-list">
-                    {filterTextList.map((text) => {
-                        const isActive = chooseFilter.includes(text);
-                        return (
-                            <li key={text}>
-                                <button
-                                    className={
-                                        "filter-btn" +
-                                        (isActive ? " active" : "")
-                                    }
-                                    onClick={clickFilterBtn}
-                                >
-                                    {text}
-                                </button>
-                            </li>
-                        );
-                    })}
-                </ul>
-            </section>
+            <ChartFilter
+                filterTextList={filterTextList}
+                chooseFilter={chooseFilter}
+                clickFilterBtn={clickFilterBtn}
+            />
         </main>
     );
 };
