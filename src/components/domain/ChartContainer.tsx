@@ -15,7 +15,7 @@ import useChartData from "../../hooks/useChartData";
 import { chartOptions } from "../../utils";
 
 import "../../styles/chartContainerStyle.scss";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 ChartJS.register(
     LinearScale,
@@ -33,7 +33,10 @@ const ChartContainer = () => {
 
     const { chartData, filterTextList } = useChartData(chooseFilter);
 
-    const clickFilterBtn = (text: string) => {
+    const clickFilterBtn = (event: MouseEvent<HTMLButtonElement>) => {
+        const text = event.currentTarget.textContent;
+        if (!text) return;
+
         const findIdx = chooseFilter.findIndex(
             (filterText) => filterText === text
         );
@@ -66,9 +69,9 @@ const ChartContainer = () => {
                                         "filter-btn" +
                                         (isActive ? " active" : "")
                                     }
-                                    onClick={() => clickFilterBtn(text)}
+                                    onClick={clickFilterBtn}
                                 >
-                                    <span>{text}</span>
+                                    {text}
                                 </button>
                             </li>
                         );
