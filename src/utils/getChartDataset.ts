@@ -1,4 +1,4 @@
-import { ChartDataset } from "chart.js";
+import { ChartData, ChartDataset } from "chart.js";
 import { ChartDatasetTypes, DistrictSeoulValue } from "../types";
 import {
     CHART_COLOR,
@@ -68,11 +68,10 @@ const getLineDataset = (
 const getChartDataset = (
     dataArr: DistrictSeoulValue[],
     axisXLabels: string[]
-): ChartDataset<"bar" | "line", ChartDatasetTypes[]>[] => {
-    return [
-        getBarDataset(dataArr, axisXLabels),
-        getLineDataset(dataArr, axisXLabels),
-    ];
+): ChartData<"bar" | "line", ChartDatasetTypes[]> => {
+    const barDataset = getBarDataset(dataArr, axisXLabels);
+    const areaDataset = getLineDataset(dataArr, axisXLabels);
+    return { datasets: [barDataset, areaDataset] };
 };
 
 export default getChartDataset;

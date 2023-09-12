@@ -32,3 +32,6 @@ export const CHART_LIMIT = {
 };
 export const CHART_X_AXES = "x";
 export const CHART_Y_AXES = "y";
+
+export const FILTER_TYPE_BTN = "btn";
+export const FILTER_TYPE_CHART = "chart";

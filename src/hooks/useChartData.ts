@@ -23,9 +23,7 @@ const useChartData = (chooseFilter: string[]) => {
         setFilterTextList(filterTextArr);
 
         const datasets = getChartDataset(dataValue, axisXLabels);
-        setChartData({
-            datasets,
-        });
+        setChartData(datasets);
     };
 
     const fetch = async () => {

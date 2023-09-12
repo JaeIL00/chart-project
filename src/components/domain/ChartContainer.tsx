@@ -1,4 +1,4 @@
-import { Chart } from "react-chartjs-2";
+import { Chart, getElementsAtEvent } from "react-chartjs-2";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -9,14 +9,16 @@ import {
     Filler,
     Legend,
     Tooltip,
+    InteractionItem,
 } from "chart.js";
 
 import useChartData from "../../hooks/useChartData";
 import { chartOptions } from "../../utils";
 
 import "../../styles/chartContainerStyle.scss";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import ChartFilter from "./ChartFilter";
+import { FILTER_TYPE_BTN, FILTER_TYPE_CHART } from "../../constants";
 
 ChartJS.register(
     LinearScale,
@@ -30,14 +32,13 @@ ChartJS.register(
 );
 
 const ChartContainer = () => {
+    const chartRef = useRef<ChartJS>(null);
+
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
 
     const { chartData, filterTextList } = useChartData(chooseFilter);
 
-    const clickFilterBtn = (event: MouseEvent<HTMLButtonElement>) => {
-        const text = event.currentTarget.textContent;
-        if (!text) return;
-
+    const updateChooseFilter = (text: string, type: string) => {
         const findIdx = chooseFilter.findIndex(
             (filterText) => filterText === text
         );
@@ -45,14 +46,45 @@ const ChartContainer = () => {
             const freshChooseFilter = chooseFilter.filter(
                 (_, idx) => idx !== findIdx
             );
-            setChooseFilter(freshChooseFilter);
-        } else setChooseFilter((prev) => [...prev, text]);
+            setChooseFilter(() => {
+                return type === "btn" ? freshChooseFilter : [];
+            });
+        } else {
+            setChooseFilter((prev) => {
+                return type === "btn" ? [...prev, text] : [text];
+            });
+        }
+    };
+
+    const getIdClickChart = (clickElement: InteractionItem[]) => {
+        if (clickElement.length === 0) return;
+        const { datasetIndex, index } = clickElement[0];
+        const id = chartData.datasets[datasetIndex].data[index].y.id;
+        updateChooseFilter(id, FILTER_TYPE_CHART);
+    };
+
+    const clickFilterBtn = (event: MouseEvent<HTMLButtonElement>) => {
+        const text = event.currentTarget.textContent;
+        if (!text) return;
+        updateChooseFilter(text, FILTER_TYPE_BTN);
+    };
+
+    const clickChart = (event: MouseEvent<HTMLCanvasElement>) => {
+        if (!chartRef.current) return;
+        const clickElement = getElementsAtEvent(chartRef.current, event);
+        getIdClickChart(clickElement);
     };
 
     return (
         <main>
             {chartData && (
-                <Chart type="bar" data={chartData} options={chartOptions} />
+                <Chart
+                    ref={chartRef as any}
+                    type="bar"
+                    data={chartData}
+                    options={chartOptions}
+                    onClick={clickChart}
+                />
             )}
 
             <ChartFilter
