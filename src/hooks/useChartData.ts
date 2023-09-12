@@ -36,26 +36,27 @@ const useChartData = (chooseFilter: string[]) => {
 
     const filterChangeStyle = () => {
         const isExist = chartData.datasets.length > 0;
-        if (isExist) {
-            const { barBackgroundColor, areaBorderWidth } =
-                getFilteredChartStyle(chooseFilter, chartData);
+        if (!isExist) return;
 
-            setChartData((prev) => {
-                const [barDataset, areaDataset] = prev.datasets;
-                return {
-                    datasets: [
-                        {
-                            ...barDataset,
-                            backgroundColor: barBackgroundColor,
-                        },
-                        {
-                            ...areaDataset,
-                            pointBackgroundColor: areaBorderWidth,
-                        },
-                    ],
-                };
-            });
-        }
+        const { barBackgroundColor, areaBorderWidth } = getFilteredChartStyle(
+            chooseFilter,
+            chartData
+        );
+        setChartData((prev) => {
+            const [barDataset, areaDataset] = prev.datasets;
+            return {
+                datasets: [
+                    {
+                        ...barDataset,
+                        backgroundColor: barBackgroundColor,
+                    },
+                    {
+                        ...areaDataset,
+                        pointBackgroundColor: areaBorderWidth,
+                    },
+                ],
+            };
+        });
     };
 
     useEffect(() => {
