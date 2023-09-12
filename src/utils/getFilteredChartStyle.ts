@@ -1,6 +1,6 @@
 import { ChartData } from "chart.js";
 import { ChartDatasetTypes } from "../types";
-import { CHART_COLOR, CHART_HOVER_COLOR } from "../constants";
+import { CHART_COLOR, CHART_FILTER_COLOR } from "../constants";
 
 const getFilteredChartStyle = (
     chooseFilter: string[],
@@ -10,12 +10,12 @@ const getFilteredChartStyle = (
 
     const barBackgroundColor = barDataset.data.map((item) => {
         return chooseFilter.includes(item.y.id)
-            ? CHART_HOVER_COLOR.BAR
+            ? CHART_FILTER_COLOR.BAR
             : CHART_COLOR.BAR;
     });
     const areaBorderWidth = areaDataset.data.map((item) => {
         return chooseFilter.includes(item.y.id)
-            ? CHART_HOVER_COLOR.AREA
+            ? CHART_FILTER_COLOR.AREA
             : CHART_COLOR.AREA;
     });
 

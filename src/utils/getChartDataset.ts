@@ -58,7 +58,7 @@ const getLineDataset = (
         pointBorderWidth: 0,
 
         pointHoverBorderColor: CHART_HOVER_COLOR.AREA,
-        pointHoverBackgroundColor: CHART_HOVER_COLOR.AREA,
+        pointHoverBackgroundColor: "transparent",
         pointHoverBorderWidth: 2,
 
         fill: true,

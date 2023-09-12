@@ -7,6 +7,10 @@ export const CHART_COLOR = {
     GRID: " rgb(153, 153, 153, 0.1)",
 };
 export const CHART_HOVER_COLOR = {
+    BAR: "rgb(113, 48, 255, 0.9)",
+    AREA: "rgb(250, 255, 114)",
+};
+export const CHART_FILTER_COLOR = {
     BAR: "rgb(63, 172, 255, 0.9)",
     AREA: "rgb(104, 255, 81)",
 };
