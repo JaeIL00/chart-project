@@ -1,5 +1,6 @@
 import { ChartOptions, CoreScaleOptions, Scale } from "chart.js";
 import { CHART_COLOR, CHART_LIMIT } from "../constants";
+import { TooltipItemTypes } from "../types";
 
 const chartOptions: ChartOptions<"bar" | "line"> = {
     responsive: true,
@@ -47,6 +48,17 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
         filler: {
             propagate: true,
         },
+        tooltip: {
+            callbacks: {
+                beforeBody: (tooltipItem: TooltipItemTypes[]) => {
+                    return `id: ${tooltipItem[0].raw.y.id}`;
+                },
+            },
+        },
+    },
+    interaction: {
+        mode: "index",
+        intersect: false,
     },
 };
 

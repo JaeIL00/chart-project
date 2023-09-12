@@ -8,6 +8,7 @@ import {
     LineElement,
     Filler,
     Legend,
+    Tooltip,
 } from "chart.js";
 
 import useChartData from "../../hooks/useChartData";
@@ -22,7 +23,8 @@ ChartJS.register(
     PointElement,
     LineElement,
     Filler,
-    Legend
+    Legend,
+    Tooltip
 );
 
 const ChartContainer = () => {
