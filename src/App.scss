@@ -1,3 +1,5 @@
+@import "./styles/variables.scss";
+
 #root {
     width: 100vw;
     height: 100vh;
@@ -5,10 +7,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #2b2b2b;
+    background-color: $color-black;
 
     header {
-        color: #efefef;
+        color: $color-white;
         font-weight: 700;
         font-size: 1.6rem;
     }

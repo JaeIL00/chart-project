@@ -15,6 +15,7 @@ import useChartData from "../../hooks/useChartData";
 import { chartOptions } from "../../utils";
 
 import "../../styles/chartContainerStyle.scss";
+import { useState } from "react";
 
 ChartJS.register(
     LinearScale,
@@ -28,13 +29,52 @@ ChartJS.register(
 );
 
 const ChartContainer = () => {
+    const [chooseFilter, setChooseFilter] = useState<string[]>([]);
+
     const { chartData, filterTextList } = useChartData();
+
+    const clickFilterBtn = (text: string) => {
+        const findIdx = chooseFilter.findIndex(
+            (filterText) => filterText === text
+        );
+        if (findIdx !== -1) {
+            const freshChooseFilter = chooseFilter.filter(
+                (_, idx) => idx !== findIdx
+            );
+            setChooseFilter(freshChooseFilter);
+        } else setChooseFilter((prev) => [...prev, text]);
+    };
 
     return (
         <main>
             {chartData && (
                 <Chart type="bar" data={chartData} options={chartOptions} />
             )}
+
+            <section className="filter-container">
+                <div className="title-box">
+                    <h5 className="filter-title">차트 필터</h5>
+                    <span className="sub-describe">중복 선택</span>
+                </div>
+                <ul className="filter-btn-list">
+                    {filterTextList.map((text) => {
+                        const isActive = chooseFilter.includes(text);
+                        return (
+                            <li key={text}>
+                                <button
+                                    className={
+                                        "filter-btn" +
+                                        (isActive ? " active" : "")
+                                    }
+                                    onClick={() => clickFilterBtn(text)}
+                                >
+                                    <span>{text}</span>
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </section>
         </main>
     );
 };
