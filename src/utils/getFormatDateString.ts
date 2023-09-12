@@ -6,7 +6,7 @@ const getFormatDateString = (date: Date): string => {
     const min = date.getMinutes();
     const sec = date.getSeconds();
 
-    return `${year}년 ${month}월 ${day}일 ${hour}시 ${min}분 ${sec}초`;
+    return `${year}년 ${month}월 ${day}일 ${hour}:${min}:${sec}`;
 };
 
 export default getFormatDateString;
