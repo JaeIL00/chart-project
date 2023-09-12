@@ -31,7 +31,7 @@ ChartJS.register(
 const ChartContainer = () => {
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
 
-    const { chartData, filterTextList } = useChartData();
+    const { chartData, filterTextList } = useChartData(chooseFilter);
 
     const clickFilterBtn = (text: string) => {
         const findIdx = chooseFilter.findIndex(
