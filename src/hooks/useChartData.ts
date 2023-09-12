@@ -4,13 +4,19 @@ import { ChartData } from "chart.js";
 import { ChartDatasetTypes, DistrictSeoulResponse } from "../types";
 import { getDistrictSeoulApi } from "../apis/districtSeoul";
 import { getSeperateResponse, getChartDataset } from "../utils";
+import getChartFilterText from "../utils/getChartFilterText";
 
 const useChartData = () => {
+    const [filterTextList, setFilterTextList] = useState<string[]>([]);
     const [chartData, setChartData] =
         useState<ChartData<"bar" | "line", ChartDatasetTypes[]>>();
 
     const formatFetchResponse = (data: DistrictSeoulResponse) => {
         const { dataValue, axisXLabels } = getSeperateResponse(data);
+
+        const filterTextArr = getChartFilterText(dataValue);
+        setFilterTextList(filterTextArr);
+
         const datasets = getChartDataset(dataValue, axisXLabels);
         setChartData({
             datasets,
@@ -29,6 +35,7 @@ const useChartData = () => {
 
     return {
         chartData,
+        filterTextList,
     };
 };
 

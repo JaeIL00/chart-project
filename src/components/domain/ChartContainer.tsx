@@ -28,7 +28,7 @@ ChartJS.register(
 );
 
 const ChartContainer = () => {
-    const { chartData } = useChartData();
+    const { chartData, filterTextList } = useChartData();
 
     return (
         <main>
