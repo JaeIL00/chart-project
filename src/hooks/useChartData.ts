@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { ChartData } from "chart.js";
 
-import { DistrictSeoulResponse } from "../types";
+import { ChartDatasetTypes, DistrictSeoulResponse } from "../types";
 import { getDistrictSeoulApi } from "../apis/districtSeoul";
 import { getSeperateResponse, getChartDataset } from "../utils";
 
 const useChartData = () => {
-    const [chartData, setChartData] = useState<ChartData<"bar" | "line">>();
+    const [chartData, setChartData] =
+        useState<ChartData<"bar" | "line", ChartDatasetTypes[]>>();
 
     const formatFetchResponse = (data: DistrictSeoulResponse) => {
         const { dataValue, axisXLabels } = getSeperateResponse(data);
-        const datasets = getChartDataset(dataValue);
+        const datasets = getChartDataset(dataValue, axisXLabels);
         setChartData({
-            labels: axisXLabels,
             datasets,
         });
     };

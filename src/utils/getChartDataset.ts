@@ -1,24 +1,51 @@
 import { ChartDataset } from "chart.js";
-import { DistrictSeoulData } from "../types";
-import { CHART_COLOR, CHART_ID, CHART_LABElS, CHART_ORDER } from "../constants";
+import { ChartDatasetTypes, DistrictSeoulValue } from "../types";
+import {
+    CHART_COLOR,
+    CHART_ID,
+    CHART_LABElS,
+    CHART_ORDER,
+    CHART_X_AXES,
+    CHART_Y_AXES,
+} from "../constants";
 
-const getBarDataset = (dataArr: DistrictSeoulData[]): ChartDataset<"bar"> => {
+const getBarDataset = (
+    dataArr: DistrictSeoulValue[],
+    axisXLabels: string[]
+): ChartDataset<"bar", ChartDatasetTypes[]> => {
     return {
         type: "bar",
         label: CHART_LABElS.BAR,
         yAxisID: CHART_ID.BAR,
-        data: dataArr.map((item) => item.value_bar),
+        data: axisXLabels.map((item, idx) => ({
+            [CHART_X_AXES]: item,
+            [CHART_Y_AXES]: dataArr[idx],
+        })),
+        parsing: {
+            xAxisKey: CHART_X_AXES,
+            yAxisKey: `${CHART_Y_AXES}.value_bar`,
+        },
         order: CHART_ORDER.BAR,
         backgroundColor: CHART_COLOR.BAR,
     };
 };
 
-const getLineDataset = (dataArr: DistrictSeoulData[]): ChartDataset<"line"> => {
+const getLineDataset = (
+    dataArr: DistrictSeoulValue[],
+    axisXLabels: string[]
+): ChartDataset<"line", ChartDatasetTypes[]> => {
     return {
         type: "line",
         label: CHART_LABElS.AREA,
         yAxisID: CHART_ID.AREA,
-        data: dataArr.map((item) => item.value_area),
+        data: axisXLabels.map((item, idx) => ({
+            [CHART_X_AXES]: item,
+            [CHART_Y_AXES]: dataArr[idx],
+        })),
+        parsing: {
+            xAxisKey: CHART_X_AXES,
+            yAxisKey: `${CHART_Y_AXES}.value_area`,
+        },
         order: CHART_ORDER.AREA,
         backgroundColor: CHART_COLOR.AREA,
         borderColor: CHART_COLOR.AREA_BORDER,
@@ -30,9 +57,13 @@ const getLineDataset = (dataArr: DistrictSeoulData[]): ChartDataset<"line"> => {
 };
 
 const getChartDataset = (
-    dataArr: DistrictSeoulData[]
-): ChartDataset<"bar" | "line">[] => {
-    return [getBarDataset(dataArr), getLineDataset(dataArr)];
+    dataArr: DistrictSeoulValue[],
+    axisXLabels: string[]
+): ChartDataset<"bar" | "line", ChartDatasetTypes[]>[] => {
+    return [
+        getBarDataset(dataArr, axisXLabels),
+        getLineDataset(dataArr, axisXLabels),
+    ];
 };
 
 export default getChartDataset;

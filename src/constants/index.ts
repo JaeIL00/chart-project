@@ -22,3 +22,5 @@ export const CHART_LIMIT = {
     BAR: 1.2,
     AREA: 3,
 };
+export const CHART_X_AXES = "x";
+export const CHART_Y_AXES = "y";
