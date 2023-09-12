@@ -2,8 +2,11 @@ const getFormatDateString = (date: Date): string => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
+    const hour = date.getHours();
+    const min = date.getMinutes();
+    const sec = date.getSeconds();
 
-    return `${year}년 ${month}월 ${day}일`;
+    return `${year}년 ${month}월 ${day}일 ${hour}시 ${min}분 ${sec}초`;
 };
 
 export default getFormatDateString;
