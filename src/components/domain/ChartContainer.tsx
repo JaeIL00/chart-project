@@ -16,7 +16,7 @@ import {
 import ChartFilter from "./ChartFilter";
 import { useChartData } from "../../hooks";
 import { chartOptions } from "../../utils";
-import { FILTER_TYPE_BTN, FILTER_TYPE_CHART } from "../../constants";
+import { FILTER_TYPE_BTN, FILTER_TYPE_CHART, FIND_FAIL } from "../../constants";
 
 import "../../styles/chartContainerStyle.scss";
 
@@ -42,7 +42,7 @@ const ChartContainer = () => {
         const findIdx = chooseFilter.findIndex(
             (filterText) => filterText === text
         );
-        if (findIdx !== -1) {
+        if (findIdx !== FIND_FAIL) {
             const freshChooseFilter = chooseFilter.filter(
                 (_, idx) => idx !== findIdx
             );

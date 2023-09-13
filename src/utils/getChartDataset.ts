@@ -2,7 +2,6 @@ import { ChartData, ChartDataset } from "chart.js";
 import { ChartDatasetTypes, DistrictSeoulValue } from "../types";
 import {
     CHART_COLOR,
-    CHART_HOVER_COLOR,
     CHART_ID,
     CHART_LABElS,
     CHART_ORDER,
@@ -24,12 +23,12 @@ const getBarDataset = (
         })),
         parsing: {
             xAxisKey: CHART_X_AXES,
-            yAxisKey: `${CHART_Y_AXES}.value_bar`,
+            yAxisKey: `${CHART_Y_AXES}.${CHART_LABElS.BAR}`,
         },
         order: CHART_ORDER.BAR,
 
         backgroundColor: CHART_COLOR.BAR,
-        hoverBackgroundColor: CHART_HOVER_COLOR.BAR,
+        hoverBackgroundColor: CHART_COLOR.HOVER_BAR,
     };
 };
 
@@ -47,7 +46,7 @@ const getLineDataset = (
         })),
         parsing: {
             xAxisKey: CHART_X_AXES,
-            yAxisKey: `${CHART_Y_AXES}.value_area`,
+            yAxisKey: `${CHART_Y_AXES}.${CHART_LABElS.AREA}`,
         },
         order: CHART_ORDER.AREA,
 
@@ -57,7 +56,7 @@ const getLineDataset = (
         borderWidth: 2,
         pointBorderWidth: 0,
 
-        pointHoverBorderColor: CHART_HOVER_COLOR.AREA,
+        pointHoverBorderColor: CHART_COLOR.HOVER_AREA,
         pointHoverBackgroundColor: "transparent",
         pointHoverBorderWidth: 2,
 

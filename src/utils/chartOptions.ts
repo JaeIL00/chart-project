@@ -1,5 +1,5 @@
 import { ChartOptions, CoreScaleOptions, Scale } from "chart.js";
-import { CHART_COLOR, CHART_LIMIT } from "../constants";
+import { CHART_COLOR, CHART_LIMIT, CHART_TITLE } from "../constants";
 import { TooltipItemTypes } from "../types";
 
 const chartOptions: ChartOptions<"bar" | "line"> = {
@@ -10,9 +10,9 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
             position: "left",
             title: {
                 display: true,
-                text: "Bar",
+                text: CHART_TITLE.BAR,
                 font: {
-                    size: 14,
+                    size: CHART_TITLE.FONT_SIZE,
                 },
             },
             grid: {
@@ -26,9 +26,9 @@ const chartOptions: ChartOptions<"bar" | "line"> = {
             position: "right",
             title: {
                 display: true,
-                text: "Area",
+                text: CHART_TITLE.AREA,
                 font: {
-                    size: 14,
+                    size: CHART_TITLE.FONT_SIZE,
                 },
             },
             afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
