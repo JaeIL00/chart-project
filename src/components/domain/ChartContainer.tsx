@@ -13,12 +13,12 @@ const ChartContainer = () => {
     const { chartData, filterTextList, error, refetch } =
         useChartData(chooseFilter);
 
+    const resetFilter = () => setChooseFilter([]);
+
     const refreshChart = () => {
-        setChooseFilter([]);
+        resetFilter();
         refetch();
     };
-
-    const resetFilter = () => setChooseFilter([]);
 
     const prevChooseFilterHandler = (
         findIdx: number,
