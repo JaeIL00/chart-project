@@ -26,6 +26,9 @@ const useChartData = (chooseFilter: string[]) => {
     };
 
     const fetch = async () => {
+        setChartData({
+            datasets: [],
+        });
         await getDistrictSeoulApi().then(({ data }) =>
             formatFetchResponse(data)
         );
@@ -67,6 +70,7 @@ const useChartData = (chooseFilter: string[]) => {
     return {
         chartData,
         filterTextList,
+        refetch: fetch,
     };
 };
 

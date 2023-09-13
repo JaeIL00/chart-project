@@ -1,5 +1,6 @@
 import { MouseEvent, useRef, useState } from "react";
 import { Chart, getElementsAtEvent } from "react-chartjs-2";
+import { IoMdRefresh } from "react-icons/io";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -36,7 +37,9 @@ const ChartContainer = () => {
 
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
 
-    const { chartData, filterTextList } = useChartData(chooseFilter);
+    const { chartData, filterTextList, refetch } = useChartData(chooseFilter);
+
+    const refreshChart = () => refetch();
 
     const prevChooseFilterHandler = (
         findIdx: number,
@@ -88,6 +91,9 @@ const ChartContainer = () => {
         <>
             <header>
                 <h1>시계열 차트</h1>
+                <button className="chart-refresh-btn" onClick={refreshChart}>
+                    <IoMdRefresh size="18" color="#efefef" />
+                </button>
             </header>
             <main>
                 {chartData && (
