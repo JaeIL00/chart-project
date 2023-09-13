@@ -52,8 +52,7 @@ const ChartContainer = () => {
         setChooseFilter(typeConditionalState);
     };
 
-    //chooseFilter, setChooseFilter, text, type, FIND_FAIL
-    const updateChooseFilter = (text: string, type: string) => {
+    const updateChooseFilter = (text: string, type: "btn" | "chart") => {
         const findIdx = chooseFilter.findIndex(
             (filterText) => filterText === text
         );
