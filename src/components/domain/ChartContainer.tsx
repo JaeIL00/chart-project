@@ -38,21 +38,31 @@ const ChartContainer = () => {
 
     const { chartData, filterTextList } = useChartData(chooseFilter);
 
+    const prevChooseFilterHandler = (
+        findIdx: number,
+        text: string,
+        type: string
+    ) => {
+        const freshChooseFilter = chooseFilter.filter(
+            (_, idx) => idx !== findIdx
+        );
+        const chartClickInitState = chooseFilter.length > 1 ? [text] : [];
+        const typeConditionalState =
+            type === "btn" ? freshChooseFilter : chartClickInitState;
+        setChooseFilter(typeConditionalState);
+    };
+
+    //chooseFilter, setChooseFilter, text, type, FIND_FAIL
     const updateChooseFilter = (text: string, type: string) => {
         const findIdx = chooseFilter.findIndex(
             (filterText) => filterText === text
         );
-        if (findIdx !== FIND_FAIL) {
-            const freshChooseFilter = chooseFilter.filter(
-                (_, idx) => idx !== findIdx
-            );
-            setChooseFilter(() => {
-                return type === "btn" ? freshChooseFilter : [];
-            });
-        } else {
+        if (findIdx === FIND_FAIL) {
             setChooseFilter((prev) => {
                 return type === "btn" ? [...prev, text] : [text];
             });
+        } else {
+            prevChooseFilterHandler(findIdx, text, type);
         }
     };
 
