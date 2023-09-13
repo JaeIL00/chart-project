@@ -204,7 +204,7 @@ npm run dev
   const freshDataValue = dataValue.filter(
         (data, idx) => idArr.indexOf(data.id) === idx
     );
-    const filterTextArr = freshDataValue.map((data) => data.id);
+  const filterTextArr = freshDataValue.map((data) => data.id);
   ```
 - 커스텀훅 내부에 추상과 구체를 분리하려 노력함
 - 비교 연산 비용이 들지 않는 함수 메모이제이션. 사이드 이펙트를 알아야하는 함수는 제외
