@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { Chart, getElementsAtEvent } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -37,7 +37,8 @@ const ChartContainer = () => {
 
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
 
-    const { chartData, filterTextList, refetch } = useChartData(chooseFilter);
+    const { chartData, filterTextList, error, refetch } =
+        useChartData(chooseFilter);
 
     const refreshChart = () => {
         setChooseFilter([]);
@@ -91,6 +92,10 @@ const ChartContainer = () => {
         const clickElement = getElementsAtEvent(chartRef.current, event);
         getIdClickChart(clickElement);
     };
+
+    useEffect(() => {
+        if (error) alert(error);
+    }, [error]);
 
     return (
         <>

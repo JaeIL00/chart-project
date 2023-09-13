@@ -10,6 +10,7 @@ import {
 } from "../utils";
 
 const useChartData = (chooseFilter: string[]) => {
+    const [error, setError] = useState<string>("");
     const [filterTextList, setFilterTextList] = useState<string[]>([]);
     const [chartData, setChartData] = useState<ChartDataCustom>({
         datasets: [],
@@ -25,13 +26,15 @@ const useChartData = (chooseFilter: string[]) => {
         setChartData(datasets);
     };
 
+    const initState = () => {
+        setError("");
+    };
+
     const fetch = async () => {
-        setChartData({
-            datasets: [],
-        });
-        await getDistrictSeoulApi().then(({ data }) =>
-            formatFetchResponse(data)
-        );
+        initState();
+        await getDistrictSeoulApi()
+            .then(({ data }) => formatFetchResponse(data))
+            .catch((error) => setError(`${error.code}: 재시도 해주세요`));
     };
 
     const filterChangeStyle = () => {
@@ -70,6 +73,7 @@ const useChartData = (chooseFilter: string[]) => {
     return {
         chartData,
         filterTextList,
+        error,
         refetch: fetch,
     };
 };
