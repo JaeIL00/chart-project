@@ -1,15 +1,4 @@
 import { MouseEvent, useEffect, useState } from "react";
-import {
-    Chart as ChartJS,
-    LinearScale,
-    CategoryScale,
-    BarElement,
-    PointElement,
-    LineElement,
-    Filler,
-    Legend,
-    Tooltip,
-} from "chart.js";
 
 import { ChartFilter, PaintChart } from ".";
 import { RefreshButton } from "../common";
@@ -17,17 +6,6 @@ import { useChartData } from "../../hooks";
 import { FILTER_TYPE_BTN, FIND_FAIL } from "../../constants";
 
 import "../../styles/chartContainerStyle.scss";
-
-ChartJS.register(
-    LinearScale,
-    CategoryScale,
-    BarElement,
-    PointElement,
-    LineElement,
-    Filler,
-    Legend,
-    Tooltip
-);
 
 const ChartContainer = () => {
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
