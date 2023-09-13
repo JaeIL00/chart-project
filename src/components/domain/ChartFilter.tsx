@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback } from "react";
+import { MouseEvent } from "react";
 
 import { RefreshButton } from "../common";
 
@@ -22,8 +22,8 @@ const ChartFilter = ({
     clickFilterBtn,
     resetFilter,
 }: Props) => {
-    const FilterButton = useCallback(
-        ({ isActive, text }: FilterButtonProps) => (
+    const FilterButton = ({ isActive, text }: FilterButtonProps) => {
+        return (
             <li>
                 <button
                     className={"filter-btn" + (isActive ? " active" : "")}
@@ -32,9 +32,8 @@ const ChartFilter = ({
                     {text}
                 </button>
             </li>
-        ),
-        []
-    );
+        );
+    };
 
     return (
         <section className="filter-container">
