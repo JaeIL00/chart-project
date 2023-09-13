@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import { IoMdRefresh } from "react-icons/io";
 
 import "../../styles/chartFilterStyle.scss";
 
@@ -6,12 +7,14 @@ interface Props {
     filterTextList: string[];
     chooseFilter: string[];
     clickFilterBtn: (event: MouseEvent<HTMLButtonElement>) => void;
+    resetFilter: () => void;
 }
 
 const ChartFilter = ({
     filterTextList,
     chooseFilter,
     clickFilterBtn,
+    resetFilter,
 }: Props) => {
     return (
         <section className="filter-container">
@@ -35,6 +38,11 @@ const ChartFilter = ({
                         </li>
                     );
                 })}
+                <li>
+                    <button className="chart-refresh-btn" onClick={resetFilter}>
+                        <IoMdRefresh size="18" color="#efefef" />
+                    </button>
+                </li>
             </ul>
         </section>
     );

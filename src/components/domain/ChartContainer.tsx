@@ -41,6 +41,8 @@ const ChartContainer = () => {
 
     const refreshChart = () => refetch();
 
+    const resetFilter = () => setChooseFilter([]);
+
     const prevChooseFilterHandler = (
         findIdx: number,
         text: string,
@@ -110,6 +112,7 @@ const ChartContainer = () => {
                     filterTextList={filterTextList}
                     chooseFilter={chooseFilter}
                     clickFilterBtn={clickFilterBtn}
+                    resetFilter={resetFilter}
                 />
             </main>
         </>
