@@ -1,1 +1,1 @@
-export { default as getDistrictSeoulApi } from "./getDistrictSeoulApi";
+export { default as getDistrictSeoulApi } from './getDistrictSeoulApi';

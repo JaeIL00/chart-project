@@ -1,1 +1,1 @@
-export { default as useChartData } from "./useChartData";
+export { default as useChartData } from './useChartData';
