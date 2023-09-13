@@ -94,7 +94,7 @@ npm run dev
       yAxisKey: `${CHART_Y_AXES}.${CHART_LABElS.AREA}`,
     },
     ```
--   차트 `scale` 옵션 활용해 `bar`, `area` 그래프 y축 값 설정
+-   차트 `scale` 옵션 활용해 `bar`, `area` 그래프 y축 값 설정. 그래프 상단 공간 여유를 위해 `afterDataLimits` 속성으로 현재 scale 최댓값 키움
 	```ts
 	scales: {
         bar: {
