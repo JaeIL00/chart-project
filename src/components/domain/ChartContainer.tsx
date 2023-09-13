@@ -39,7 +39,10 @@ const ChartContainer = () => {
 
     const { chartData, filterTextList, refetch } = useChartData(chooseFilter);
 
-    const refreshChart = () => refetch();
+    const refreshChart = () => {
+        setChooseFilter([]);
+        refetch();
+    };
 
     const resetFilter = () => setChooseFilter([]);
 
