@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ChartDataCustom, DistrictSeoulResponse } from "../types";
 import { getDistrictSeoulApi } from "../apis";
@@ -30,12 +30,12 @@ const useChartData = (chooseFilter: string[]) => {
         setError("");
     };
 
-    const fetch = async () => {
+    const fetch = useCallback(async () => {
         initState();
         await getDistrictSeoulApi()
             .then(({ data }) => formatFetchResponse(data))
             .catch((error) => setError(`${error.code}: 재시도 해주세요`));
-    };
+    }, []);
 
     const filterChangeStyle = () => {
         const isExist = chartData.datasets.length > 0;
