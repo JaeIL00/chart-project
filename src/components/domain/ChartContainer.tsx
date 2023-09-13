@@ -1,3 +1,4 @@
+import { MouseEvent, useRef, useState } from "react";
 import { Chart, getElementsAtEvent } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -12,13 +13,12 @@ import {
     InteractionItem,
 } from "chart.js";
 
-import useChartData from "../../hooks/useChartData";
+import ChartFilter from "./ChartFilter";
+import { useChartData } from "../../hooks";
 import { chartOptions } from "../../utils";
+import { FILTER_TYPE_BTN, FILTER_TYPE_CHART } from "../../constants";
 
 import "../../styles/chartContainerStyle.scss";
-import { MouseEvent, useRef, useState } from "react";
-import ChartFilter from "./ChartFilter";
-import { FILTER_TYPE_BTN, FILTER_TYPE_CHART } from "../../constants";
 
 ChartJS.register(
     LinearScale,

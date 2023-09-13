@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ChartData } from "chart.js";
 
 import { ChartDatasetTypes, DistrictSeoulResponse } from "../types";
-import { getDistrictSeoulApi } from "../apis/districtSeoul";
+import { getDistrictSeoulApi } from "../apis";
 import {
     getSeperateResponse,
     getChartDataset,
