@@ -27,7 +27,11 @@ const PaintChart = ({ chartData, updateChooseFilter }: Props) => {
     getIdClickChart(clickElement);
   };
 
-  return <Chart ref={chartRef as any} type="bar" data={chartData} options={chartOptions} onClick={clickChart} />;
+  return (
+    <section>
+      <Chart ref={chartRef as any} type="bar" data={chartData} options={chartOptions} onClick={clickChart} />
+    </section>
+  );
 };
 
 export default PaintChart;
