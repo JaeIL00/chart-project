@@ -1,5 +1,4 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
-import { Chart, getElementsAtEvent } from "react-chartjs-2";
+import { MouseEvent, useEffect, useState } from "react";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -10,14 +9,12 @@ import {
     Filler,
     Legend,
     Tooltip,
-    InteractionItem,
 } from "chart.js";
 
-import { ChartFilter } from "..";
+import { ChartFilter, PaintChart } from ".";
 import { RefreshButton } from "../common";
 import { useChartData } from "../../hooks";
-import { chartOptions } from "../../utils";
-import { FILTER_TYPE_BTN, FILTER_TYPE_CHART, FIND_FAIL } from "../../constants";
+import { FILTER_TYPE_BTN, FIND_FAIL } from "../../constants";
 
 import "../../styles/chartContainerStyle.scss";
 
@@ -33,8 +30,6 @@ ChartJS.register(
 );
 
 const ChartContainer = () => {
-    const chartRef = useRef<ChartJS>(null);
-
     const [chooseFilter, setChooseFilter] = useState<string[]>([]);
 
     const { chartData, filterTextList, error, refetch } =
@@ -74,23 +69,10 @@ const ChartContainer = () => {
         }
     };
 
-    const getIdClickChart = (clickElement: InteractionItem[]) => {
-        if (clickElement.length === 0) return;
-        const { datasetIndex, index } = clickElement[0];
-        const id = chartData.datasets[datasetIndex].data[index].y.id;
-        updateChooseFilter(id, FILTER_TYPE_CHART);
-    };
-
     const clickFilterBtn = (event: MouseEvent<HTMLButtonElement>) => {
         const text = event.currentTarget.textContent;
         if (!text) return;
         updateChooseFilter(text, FILTER_TYPE_BTN);
-    };
-
-    const clickChart = (event: MouseEvent<HTMLCanvasElement>) => {
-        if (!chartRef.current) return;
-        const clickElement = getElementsAtEvent(chartRef.current, event);
-        getIdClickChart(clickElement);
     };
 
     useEffect(() => {
@@ -106,14 +88,10 @@ const ChartContainer = () => {
                         <RefreshButton onClick={refreshChart} />
                     </header>
                     <main>
-                        <Chart
-                            ref={chartRef as any}
-                            type="bar"
-                            data={chartData}
-                            options={chartOptions}
-                            onClick={clickChart}
+                        <PaintChart
+                            chartData={chartData}
+                            updateChooseFilter={updateChooseFilter}
                         />
-
                         <ChartFilter
                             filterTextList={filterTextList}
                             chooseFilter={chooseFilter}
