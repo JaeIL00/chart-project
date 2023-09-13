@@ -1,8 +1,8 @@
+import { MouseEvent, useRef } from "react";
 import { Chart, getElementsAtEvent } from "react-chartjs-2";
+import { Chart as ChartJS, InteractionItem } from "chart.js";
 
 import { chartOptions } from "../../utils";
-import { Chart as ChartJS, InteractionItem } from "chart.js";
-import { MouseEvent, useRef } from "react";
 import { ChartDataCustom } from "../../types";
 import { FILTER_TYPE_CHART } from "../../constants";
 

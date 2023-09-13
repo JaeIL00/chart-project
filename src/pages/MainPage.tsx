@@ -1,22 +1,26 @@
 import { ChartContainer } from "../components/domain";
 import {
-    Chart,
-    LinearScale,
-    CategoryScale,
+    BarController,
     BarElement,
-    PointElement,
-    LineElement,
+    CategoryScale,
+    Chart as ChartJS,
     Filler,
     Legend,
+    LineController,
+    LineElement,
+    LinearScale,
+    PointElement,
     Tooltip,
 } from "chart.js";
 
-Chart.register(
+ChartJS.register(
+    LineController,
     LinearScale,
+    LineElement,
     CategoryScale,
+    BarController,
     BarElement,
     PointElement,
-    LineElement,
     Filler,
     Legend,
     Tooltip
