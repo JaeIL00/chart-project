@@ -67,7 +67,7 @@ npm run dev
 
 -   서버로 차트 데이터 요청 및 응답 데이터 라이브러리가 요구하는 데이터셋 포맷으로 포맷팅
 
--   차트 x축 라벨 데이터 추출 및 읽기 편한 포맷으로 포맷팅
+-   그래프 x축 라벨 데이터 추출 및 읽기 편한 포맷으로 포맷팅
 -   필터 카테고리 이름 데이터 추출
 -   차트 필터링 시 차트 데이터셋 차트 스타일 수정
 -   서버 상태 중 Error Message를 UI 컴포넌트로 전달 (Loading 상태는 현재 상황에서 UX를 해치기 때문에 미구현)
@@ -95,10 +95,52 @@ npm run dev
     },
     ```
 -   차트 `scale` 옵션 활용해 `bar`, `area` 그래프 y축 값 설정
+	```ts
+	scales: {
+        bar: {
+            display: true,
+            position: "left",
+            title: {
+                display: true,
+                text: CHART_TITLE.BAR,
+                font: {
+                    size: CHART_TITLE.FONT_SIZE,
+                },
+            },
+            grid: {
+                color: CHART_COLOR.GRID,
+            },
+            afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
+                (scale.max = scale.max * CHART_LIMIT.BAR),
+        },
+        area: {
+            display: true,
+            position: "right",
+            title: {
+                display: true,
+                text: CHART_TITLE.AREA,
+                font: {
+                    size: CHART_TITLE.FONT_SIZE,
+                },
+            },
+            afterDataLimits: (scale: Scale<CoreScaleOptions>) =>
+                (scale.max = scale.max * CHART_LIMIT.AREA),
+            beginAtZero: true,
+        },
+        y: {
+            display: false,
+        },
+        x: {
+            grid: {
+                color: CHART_COLOR.GRID,
+            },
+        },
+    }
+	```
 
 #### 3. 호버 기능 구현
 
--   차트 데이터셋에 hover 속성 활용
+-   차트 데이터셋 `hover` 속성 활용
 -   `Tooltip` 플러그인 활용해 콜백 함수에서 `id` 데이터 리턴
     ```ts
     tooltip: {
@@ -109,12 +151,26 @@ npm run dev
       },
     },
     ```
+    <img width="188" alt="스크린샷 2023-09-13 오후 7 11 57" src="https://github.com/JaeIL00/chart-project/assets/101620064/971d2e58-2528-4df5-9cae-8301f4cfc2d5">
+
 
 #### 4. 필터링 기능
 
 -   [getChartFilterText](https://github.com/JaeIL00/chart-project/blob/main/src/utils/getChartFilterText.ts)에서 `filter` 메서드를 활용해 중복 없는 카테고리 문구 추출
+	```ts
+	const freshDataValue = dataValue.filter(
+        (data, idx) => idArr.indexOf(data.id) === idx
+    );
+	```
 
--   [getFilteredChartStyle](https://github.com/JaeIL00/chart-project/blob/main/src/utils/getFilteredChartStyle.ts)에서 `chooseFilter`에 있는 현재 필터와 차트 데이터를 비교하여 일치, 불일치 조건으로 각 스타일 값을 넣은 배열 생성, 데이터셋에 해당 스타일 넣어 특정 그래프 하이라이트 구현
+-   [getFilteredChartStyle](https://github.com/JaeIL00/chart-project/blob/main/src/utils/getFilteredChartStyle.ts)에서 `chooseFilter` 요소와 차트 데이터를 비교하여 일치, 불일치 조건으로 각 스타일 값을 넣은 배열 생성, 데이터셋에 해당 스타일 배열 값 넣어 특정 그래프 하이라이트 구현
+	```ts
+	const styleHandler = (id: string, styleId: "BAR" | "AREA") => {
+        return chooseFilter.includes(id)
+            ? CHART_FILTER_COLOR[styleId]
+            : CHART_COLOR[styleId];
+    };
+	```
 -   chart.js에서 제공하는 컴포넌트 속성 `onClick` 활용해 데이터가 존재하는 그래프 요소 클릭 시 `chooseFilter` 상태 업데이트 및 상태 변화 감지하여 `getFilteredChartStyle` 함수 실행
      ```ts
      const getIdClickChart = (clickElement: InteractionItem[]) => {
@@ -142,6 +198,16 @@ npm run dev
         prevChooseFilterHandler(findIdx, text, type);
     }
     ```
+#### 5. 기타 사항
+- 더미 데이터 외에 실제 서비스를 가정으로 유연한 대응이 되도록 필터링 로직 구현
+  ```ts
+  const freshDataValue = dataValue.filter(
+        (data, idx) => idArr.indexOf(data.id) === idx
+    );
+    const filterTextArr = freshDataValue.map((data) => data.id);
+  ```
+- 커스텀훅 내부에 추상과 구체를 분리하려 노력함
+- 비교 연산 비용이 들지 않는 함수 메모이제이션. 사이드 이펙트를 알아야하는 함수는 제외
 
 ## 기술 스택
 
@@ -157,13 +223,12 @@ npm run dev
     -   react-icons
     -   sass
 
--   Chart.js 선택한 이유
+#### Chart.js 선택한 이유
 
-    -   GitHub Star 약 6만, 주간 약 240만 npm 다운로드 수로 높은 점유율을 가짐
-
-    -   공식 문서 잘 되있어 러닝커브가 짧음
-    -   커뮤니티와 많은 레퍼런스로 개발 중 문제 해결이 빠르게 가능함
-    -   Canvas 렌더링은 SVG 렌더링과 비교하여 DOM 트리 비용을 줄임
+-   GitHub Star 약 6만, 주간 약 240만 npm 다운로드 수로 높은 점유율을 가짐
+-   공식 문서 잘 되있어 러닝커브가 짧음
+-   커뮤니티와 많은 레퍼런스로 개발 중 문제 해결이 빠르게 가능함
+-   Canvas 렌더링은 SVG 렌더링과 비교하여 DOM 트리 비용을 줄임
 
 ## 폴더 구조
 
