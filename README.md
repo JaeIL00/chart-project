@@ -206,8 +206,8 @@ npm run dev
   const freshDataValue = dataValue.filter((data, idx) => idArr.indexOf(data.id) === idx);
   const filterTextArr = freshDataValue.map((data) => data.id);
   ```
-- 커스텀훅 내부에 추상과 구체를 분리하려 노력함
-- fetch 함수 메모이제이션. 사이드 이펙트를 고려하지 않아 비교연산 비용 들지 않음
+- 커스텀훅 내부에 추상과 구체를 분리하려 노력함. 외부 유틸 함수 4개 생성 및 내부 함수 고유 역할 지정
+- fetch 함수 메모이제이션. 사이드 이펙트가 고려되지 않아 비교연산 비용 들지 않음
 
 ## 기술 스택
 
