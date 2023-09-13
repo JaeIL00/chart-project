@@ -2,15 +2,15 @@ export const GET_SEOUL_END_POINT = "/mock/data.json";
 
 export const CHART_COLOR = {
     BAR: "rgb(0, 80, 137, 0.9)",
-    AREA: "rgb(124, 170, 117, 0.8)",
-    AREA_BORDER: "rgb(124, 170, 117)",
+    AREA: "rgb(124, 170, 117, 0.7)",
+    AREA_BORDER: "rgb(131, 198, 121)",
     GRID: " rgb(153, 153, 153, 0.1)",
     HOVER_BAR: "rgb(113, 48, 255, 0.9)",
-    HOVER_AREA: "rgb(250, 255, 114)",
+    HOVER_AREA: "rgb(234, 194, 63)",
 };
 export const CHART_FILTER_COLOR = {
     BAR: "rgb(63, 172, 255, 0.9)",
-    AREA: "rgb(104, 255, 81)",
+    AREA: "rgb(107, 252, 10)",
 };
 export const CHART_LABElS = {
     BAR: "value_bar",
