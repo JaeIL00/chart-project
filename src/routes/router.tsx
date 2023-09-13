@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from "../App";
-import { ErrorPage } from "../pages";
-import { ChartContainer } from "../components";
+import { ErrorPage, MainPage } from "../pages";
 
 const router = createBrowserRouter([
     {
@@ -12,7 +11,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <ChartContainer />,
+                element: <MainPage />,
             },
         ],
     },
