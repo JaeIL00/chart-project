@@ -24,7 +24,7 @@ const ChartFilter = ({
 }: Props) => {
     const FilterButton = useCallback(
         ({ isActive, text }: FilterButtonProps) => (
-            <li key={text}>
+            <li>
                 <button
                     className={"filter-btn" + (isActive ? " active" : "")}
                     onClick={clickFilterBtn}
@@ -45,7 +45,13 @@ const ChartFilter = ({
             <ul className="filter-btn-list">
                 {filterTextList.map((text) => {
                     const isActive = chooseFilter.includes(text);
-                    return <FilterButton isActive={isActive} text={text} />;
+                    return (
+                        <FilterButton
+                            key={text}
+                            isActive={isActive}
+                            text={text}
+                        />
+                    );
                 })}
                 <li>
                     <RefreshButton onClick={resetFilter} />
