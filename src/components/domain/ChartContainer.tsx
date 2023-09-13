@@ -99,28 +99,35 @@ const ChartContainer = () => {
 
     return (
         <>
-            <header>
-                <h1>시계열 차트</h1>
-                <RefreshButton onClick={refreshChart} />
-            </header>
-            <main>
-                {chartData && (
-                    <Chart
-                        ref={chartRef as any}
-                        type="bar"
-                        data={chartData}
-                        options={chartOptions}
-                        onClick={clickChart}
-                    />
-                )}
+            {chartData.datasets.length > 0 ? (
+                <>
+                    <header>
+                        <h1>시계열 차트</h1>
+                        <RefreshButton onClick={refreshChart} />
+                    </header>
+                    <main>
+                        <Chart
+                            ref={chartRef as any}
+                            type="bar"
+                            data={chartData}
+                            options={chartOptions}
+                            onClick={clickChart}
+                        />
 
-                <ChartFilter
-                    filterTextList={filterTextList}
-                    chooseFilter={chooseFilter}
-                    clickFilterBtn={clickFilterBtn}
-                    resetFilter={resetFilter}
-                />
-            </main>
+                        <ChartFilter
+                            filterTextList={filterTextList}
+                            chooseFilter={chooseFilter}
+                            clickFilterBtn={clickFilterBtn}
+                            resetFilter={resetFilter}
+                        />
+                    </main>
+                </>
+            ) : (
+                <main>
+                    <strong>요청하신 차트 데이터는 없습니다</strong>
+                    <button onClick={refreshChart}>재요청</button>
+                </main>
+            )}
         </>
     );
 };
