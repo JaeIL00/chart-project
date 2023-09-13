@@ -9,7 +9,7 @@ const ErrorPage = () => {
 
     return (
         <div>
-            <span>잘못된 경로입니다</span>
+            <h1 className="error-title">Error Page</h1>
             <button onClick={navigateHome}>홈으로 이동</button>
         </div>
     );
