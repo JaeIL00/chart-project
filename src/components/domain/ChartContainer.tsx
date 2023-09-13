@@ -1,6 +1,5 @@
 import { MouseEvent, useRef, useState } from "react";
 import { Chart, getElementsAtEvent } from "react-chartjs-2";
-import { IoMdRefresh } from "react-icons/io";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -14,7 +13,8 @@ import {
     InteractionItem,
 } from "chart.js";
 
-import ChartFilter from "./ChartFilter";
+import { ChartFilter } from "..";
+import { RefreshButton } from "../common";
 import { useChartData } from "../../hooks";
 import { chartOptions } from "../../utils";
 import { FILTER_TYPE_BTN, FILTER_TYPE_CHART, FIND_FAIL } from "../../constants";
@@ -93,9 +93,7 @@ const ChartContainer = () => {
         <>
             <header>
                 <h1>시계열 차트</h1>
-                <button className="chart-refresh-btn" onClick={refreshChart}>
-                    <IoMdRefresh size="18" color="#efefef" />
-                </button>
+                <RefreshButton onClick={refreshChart} />
             </header>
             <main>
                 {chartData && (

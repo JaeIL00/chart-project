@@ -1,5 +1,6 @@
 import { MouseEvent } from "react";
-import { IoMdRefresh } from "react-icons/io";
+
+import { RefreshButton } from "../common";
 
 import "../../styles/chartFilterStyle.scss";
 
@@ -39,9 +40,7 @@ const ChartFilter = ({
                     );
                 })}
                 <li>
-                    <button className="chart-refresh-btn" onClick={resetFilter}>
-                        <IoMdRefresh size="18" color="#efefef" />
-                    </button>
+                    <RefreshButton onClick={resetFilter} />
                 </li>
             </ul>
         </section>
