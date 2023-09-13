@@ -59,29 +59,22 @@ const ChartContainer = () => {
 
     return (
         <>
-            {chartData.datasets.length > 0 ? (
-                <>
-                    <header>
-                        <h1>시계열 차트</h1>
-                        <RefreshButton onClick={refreshChart} />
-                    </header>
-                    <main>
-                        <PaintChart
-                            chartData={chartData}
-                            updateChooseFilter={updateChooseFilter}
-                        />
-                        <ChartFilter
-                            filterTextList={filterTextList}
-                            chooseFilter={chooseFilter}
-                            clickFilterBtn={clickFilterBtn}
-                            resetFilter={resetFilter}
-                        />
-                    </main>
-                </>
-            ) : (
+            <header>
+                <h1>시계열 차트</h1>
+                <RefreshButton onClick={refreshChart} />
+            </header>
+            {chartData.datasets.length > 0 && (
                 <main>
-                    <strong>요청하신 차트 데이터는 없습니다</strong>
-                    <button onClick={refreshChart}>재요청</button>
+                    <PaintChart
+                        chartData={chartData}
+                        updateChooseFilter={updateChooseFilter}
+                    />
+                    <ChartFilter
+                        filterTextList={filterTextList}
+                        chooseFilter={chooseFilter}
+                        clickFilterBtn={clickFilterBtn}
+                        resetFilter={resetFilter}
+                    />
                 </main>
             )}
         </>
