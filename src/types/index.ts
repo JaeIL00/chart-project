@@ -1,4 +1,4 @@
-import { TooltipItem } from "chart.js";
+import { ChartData, ChartDataset, TooltipItem } from "chart.js";
 import { CHART_X_AXES, CHART_Y_AXES } from "../constants";
 
 export interface DistrictSeoulResponse {
@@ -18,6 +18,12 @@ export interface ChartDatasetTypes {
     [CHART_X_AXES]: string;
     [CHART_Y_AXES]: DistrictSeoulValue;
 }
-export interface TooltipItemTypes extends TooltipItem<"bar" | "line"> {
+export interface TooltipItemTypes extends TooltipItem<ChartTypeString> {
     raw: ChartDatasetTypes;
 }
+export type ChartDataCustom = ChartData<ChartTypeString, ChartDatasetTypes[]>;
+export type ChartDatasetCustom<T extends "bar" | "line"> = ChartDataset<
+    T,
+    ChartDatasetTypes[]
+>;
+export type ChartTypeString = "bar" | "line";

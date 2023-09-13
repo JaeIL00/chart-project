@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { ChartData } from "chart.js";
 
-import { ChartDatasetTypes, DistrictSeoulResponse } from "../types";
+import { ChartDataCustom, DistrictSeoulResponse } from "../types";
 import { getDistrictSeoulApi } from "../apis";
 import {
     getSeperateResponse,
@@ -12,9 +11,9 @@ import {
 
 const useChartData = (chooseFilter: string[]) => {
     const [filterTextList, setFilterTextList] = useState<string[]>([]);
-    const [chartData, setChartData] = useState<
-        ChartData<"bar" | "line", ChartDatasetTypes[]>
-    >({ datasets: [] });
+    const [chartData, setChartData] = useState<ChartDataCustom>({
+        datasets: [],
+    });
 
     const formatFetchResponse = (data: DistrictSeoulResponse) => {
         const { dataValue, axisXLabels } = getSeperateResponse(data);

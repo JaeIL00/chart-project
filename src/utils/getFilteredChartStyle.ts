@@ -1,10 +1,9 @@
-import { ChartData } from "chart.js";
-import { ChartDatasetTypes } from "../types";
+import { ChartDataCustom } from "../types";
 import { CHART_COLOR, CHART_FILTER_COLOR } from "../constants";
 
 const getFilteredChartStyle = (
     chooseFilter: string[],
-    chartData: ChartData<"bar" | "line", ChartDatasetTypes[]>
+    chartData: ChartDataCustom
 ) => {
     const [barDataset, areaDataset] = chartData.datasets;
 

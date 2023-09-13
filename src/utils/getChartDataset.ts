@@ -1,5 +1,8 @@
-import { ChartData, ChartDataset } from "chart.js";
-import { ChartDatasetTypes, DistrictSeoulValue } from "../types";
+import {
+    ChartDataCustom,
+    ChartDatasetCustom,
+    DistrictSeoulValue,
+} from "../types";
 import {
     CHART_COLOR,
     CHART_ID,
@@ -12,7 +15,7 @@ import {
 const getBarDataset = (
     dataArr: DistrictSeoulValue[],
     axisXLabels: string[]
-): ChartDataset<"bar", ChartDatasetTypes[]> => {
+): ChartDatasetCustom<"bar"> => {
     return {
         type: "bar",
         label: CHART_LABElS.BAR,
@@ -35,7 +38,7 @@ const getBarDataset = (
 const getLineDataset = (
     dataArr: DistrictSeoulValue[],
     axisXLabels: string[]
-): ChartDataset<"line", ChartDatasetTypes[]> => {
+): ChartDatasetCustom<"line"> => {
     return {
         type: "line",
         label: CHART_LABElS.AREA,
@@ -67,7 +70,7 @@ const getLineDataset = (
 const getChartDataset = (
     dataArr: DistrictSeoulValue[],
     axisXLabels: string[]
-): ChartData<"bar" | "line", ChartDatasetTypes[]> => {
+): ChartDataCustom => {
     const barDataset = getBarDataset(dataArr, axisXLabels);
     const areaDataset = getLineDataset(dataArr, axisXLabels);
     return { datasets: [barDataset, areaDataset] };

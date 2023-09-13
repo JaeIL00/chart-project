@@ -1,8 +1,8 @@
 import { ChartOptions, CoreScaleOptions, Scale } from "chart.js";
 import { CHART_COLOR, CHART_LIMIT, CHART_TITLE } from "../constants";
-import { TooltipItemTypes } from "../types";
+import { ChartTypeString, TooltipItemTypes } from "../types";
 
-const chartOptions: ChartOptions<"bar" | "line"> = {
+const chartOptions: ChartOptions<ChartTypeString> = {
     responsive: true,
     scales: {
         bar: {
