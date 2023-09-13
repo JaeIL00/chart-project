@@ -85,23 +85,28 @@ const ChartContainer = () => {
     };
 
     return (
-        <main>
-            {chartData && (
-                <Chart
-                    ref={chartRef as any}
-                    type="bar"
-                    data={chartData}
-                    options={chartOptions}
-                    onClick={clickChart}
-                />
-            )}
+        <>
+            <header>
+                <h1>시계열 차트</h1>
+            </header>
+            <main>
+                {chartData && (
+                    <Chart
+                        ref={chartRef as any}
+                        type="bar"
+                        data={chartData}
+                        options={chartOptions}
+                        onClick={clickChart}
+                    />
+                )}
 
-            <ChartFilter
-                filterTextList={filterTextList}
-                chooseFilter={chooseFilter}
-                clickFilterBtn={clickFilterBtn}
-            />
-        </main>
+                <ChartFilter
+                    filterTextList={filterTextList}
+                    chooseFilter={chooseFilter}
+                    clickFilterBtn={clickFilterBtn}
+                />
+            </main>
+        </>
     );
 };
 
