@@ -7,15 +7,17 @@ const getFilteredChartStyle = (
 ) => {
     const [barDataset, areaDataset] = chartData.datasets;
 
+    const styleHandler = (id: string, styleId: "BAR" | "AREA") => {
+        return chooseFilter.includes(id)
+            ? CHART_FILTER_COLOR[styleId]
+            : CHART_COLOR[styleId];
+    };
+
     const barBackgroundColor = barDataset.data.map((item) => {
-        return chooseFilter.includes(item.y.id)
-            ? CHART_FILTER_COLOR.BAR
-            : CHART_COLOR.BAR;
+        return styleHandler(item.y.id, "BAR");
     });
     const areaBorderWidth = areaDataset.data.map((item) => {
-        return chooseFilter.includes(item.y.id)
-            ? CHART_FILTER_COLOR.AREA
-            : CHART_COLOR.AREA;
+        return styleHandler(item.y.id, "AREA");
     });
 
     return {
