@@ -1,8 +1,15 @@
 # Chart-Project
-
 <img width="800" alt="스크린샷 2023-09-13 오후 6 46 26" src="https://github.com/JaeIL00/chart-project/assets/101620064/af1309de-0c27-407e-a2e1-cc7249c68be6">
 
 원티드 프리온보딩 인턴십 4주차 개인 과제 레포지토리입니다.
+## 목차
+1. [개요](https://github.com/JaeIL00/chart-project#개요)
+2. [배포](https://github.com/JaeIL00/chart-project#배포)
+3. [실행 방법](https://github.com/JaeIL00/chart-project#실행-방법)
+4. [요구 사항](https://github.com/JaeIL00/chart-project#요구-사항)
+5. [구현 기능](https://github.com/JaeIL00/chart-project#구현-기능)
+6. [기술 스택](https://github.com/JaeIL00/chart-project#기술-스택)
+7. [폴더 구조](https://github.com/JaeIL00/chart-project#폴더-구조)
 
 ## 개요
 
@@ -208,6 +215,7 @@ npm run dev
   ```
 - 커스텀훅 내부에 추상과 구체를 분리하려 노력함. 외부 유틸 함수 4개 생성 및 내부 함수 고유 역할 지정
 - fetch 함수 메모이제이션. 사이드 이펙트가 고려되지 않아 비교연산 비용 들지 않음
+- 차트 Refresh 구현
 
 ## 기술 스택
 
